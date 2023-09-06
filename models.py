@@ -21,7 +21,7 @@ class User(Base):
     goals = relationship('Goal', back_populates='user')
     investments = relationship('Investment', back_populates='user')
 
-    # Define the Transaction table
+# Define the Transaction table
 class Transaction(Base):
     __tablename__ = 'transactions'
 
@@ -36,7 +36,7 @@ class Transaction(Base):
     # Define the relationship between Transaction and User
     user = relationship('User', back_populates='transactions')
 
-    # Define the Goal table
+# Define the Goal table
 class Goal(Base):
     __tablename__ = 'goals'
 
@@ -51,7 +51,7 @@ class Goal(Base):
     # Define the relationship between Goal and User
     user = relationship('User', back_populates='goals')
 
-    # Define the Investment table
+# Define the Investment table
 class Investment(Base):
     __tablename__ = 'investments'
 
