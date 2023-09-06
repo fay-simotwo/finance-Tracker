@@ -35,3 +35,18 @@ class Transaction(Base):
 
     # Define the relationship between Transaction and User
     user = relationship('User', back_populates='transactions')
+
+    # Define the Goal table
+class Goal(Base):
+    __tablename__ = 'goals'
+
+    # Define columns for the Goal table
+    id = Column(Integer, primary_key=True)    # Unique identifier
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # User ID (foreign key)
+    name = Column(String, nullable=False)     # Goal name
+    target_amount = Column(Float, nullable=False)   # Target amount
+    current_amount = Column(Float, nullable=False)  # Current amount saved
+    target_date = Column(Date)                 # Target date (optional)
+
+    # Define the relationship between Goal and User
+    user = relationship('User', back_populates='goals')
