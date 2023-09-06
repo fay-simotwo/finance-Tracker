@@ -51,3 +51,7 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")        
+
+# Entry point of the script
+if __name__ == '__main__':
+    main()
