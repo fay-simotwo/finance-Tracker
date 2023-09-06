@@ -22,3 +22,12 @@ def create_user():
     session.add(user)
     session.commit()
     print(f"User {username} created.")
+
+ # Function to list all users
+def list_users():
+    # Query all users from the database
+    users = session.query(User).all()
+    
+    # Display user information
+    for user in users:
+        print(f"User ID: {user.id}, Username: {user.username}, Email: {user.email}")
