@@ -7,3 +7,18 @@ from sqlalchemy.orm import sessionmaker
 engine = create_engine('sqlite:///finance_tracker.db')
 Session = sessionmaker(bind=engine)
 session = Session()
+
+
+# Function to create a new user
+def create_user():
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+    email = input("Enter email: ")
+
+    # Create a User object
+    user = User(username=username, password=password, email=email)
+
+    # Add the user to the session and commit to save it to the database
+    session.add(user)
+    session.commit()
+    print(f"User {username} created.")
