@@ -31,3 +31,23 @@ def list_users():
     # Display user information
     for user in users:
         print(f"User ID: {user.id}, Username: {user.username}, Email: {user.email}")
+
+# Main function
+def main():
+    while True:
+        print("Options:")
+        print("1. Create User")
+        print("2. List Users")
+        print("3. Quit")
+
+        # Get user input for the desired action
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            create_user()
+        elif choice == "2":
+            list_users()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please try again.")        
