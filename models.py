@@ -50,3 +50,18 @@ class Goal(Base):
 
     # Define the relationship between Goal and User
     user = relationship('User', back_populates='goals')
+
+    # Define the Investment table
+class Investment(Base):
+    __tablename__ = 'investments'
+
+    # Define columns for the Investment table
+    id = Column(Integer, primary_key=True)    # Unique identifier
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # User ID (foreign key)
+    name = Column(String, nullable=False)     # Investment name
+    amount_invested = Column(Float, nullable=False)  # Amount invested
+    current_value = Column(Float, nullable=False)   # Current value of the investment
+    purchase_date = Column(Date, nullable=False)     # Purchase date
+
+    # Define the relationship between Investment and User
+    user = relationship('User', back_populates='investments')
