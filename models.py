@@ -72,3 +72,5 @@ class Investment(Base):
 
 # Create the database schema
 Base.metadata.create_all(engine)
+
+
