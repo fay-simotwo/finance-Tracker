@@ -73,8 +73,10 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 ## You Can Reach Me On
 
-- **Email:** [chepfaith18@gmail.com](Chep: chep18@gmail.com)
+- **Email:** [Chepp](chepFaith18@gmail.com)
 - **LinkedIn:** [Chepkoech Faith Simotwo](https://www.linkedin.com/in/faith-chepkoech-99280a27b/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bn4W6KtbpS%2FeiCFf76zvdqg%3D%3D)
+
+
 
 [Jump to Getting Started](#getting-started)
 
