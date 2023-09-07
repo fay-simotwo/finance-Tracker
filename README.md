@@ -21,6 +21,18 @@ The Personal Finance Tracker is a command-line application designed to help you 
 
 - **Database Storage**: All user data, including transactions, investments, and goals, is stored securely in an SQLite database.
 
+## Technologies Used
+
+- **Python**: The core programming language used for the project.
+- **SQLite**: A lightweight and serverless relational database management system used for data storage.
+- **SQLAlchemy**: A Python SQL toolkit and Object-Relational Mapping (ORM) library used for database management.
+- **bcrypt**: A library for secure password hashing.
+- **Click**: A Python package for creating command-line interfaces (CLI).
+- **Git**: A distributed version control system for tracking changes in source code.
+- **GitHub**: A web-based platform for hosting and sharing code repositories.
+- **Pyenv**: A tool for managing Python versions and virtual environments.
+- **Visual Studio Code (VS Code)**: A source code editor with built-in Git integration and extensions for Python development.
+
 ## Prerequisites
 
 Before running the Personal Finance Tracker, ensure you have the following dependencies installed:
