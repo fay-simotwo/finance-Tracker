@@ -1,67 +1,74 @@
-# Import necessary modules and classes from SQLAlchemy
-from sqlalchemy import create_engine, Column, Integer, String, Float, Date, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.sql import func
+from bcrypt import hashpw, gensalt, checkpw
 
-# Create a SQLAlchemy base class
+# Create an engine and bind it to the 'finance_tracker.db' SQLite database
+engine = create_engine('sqlite:///finance_tracker.db')
+
 Base = declarative_base()
 
-# Define the User table
 class User(Base):
     __tablename__ = 'users'
 
-    # Define columns for the User table
-    id = Column(Integer, primary_key=True)        # Unique identifier
-    username = Column(String, unique=True, nullable=False)  # Username (unique)
-    password = Column(String, nullable=False)      # Password
-    email = Column(String, unique=True, nullable=False)     # Email address
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True)
+    email = Column(String, unique=True)
+    password_hash = Column(String)  # Add password_hash column
 
-    # Define relationships between User and other tables
     transactions = relationship('Transaction', back_populates='user')
     goals = relationship('Goal', back_populates='user')
     investments = relationship('Investment', back_populates='user')
 
-# Define the Transaction table
+    def set_password(self, password):
+        salt = gensalt()
+        password_hash = hashpw(password.encode('utf-8'), salt)
+        self.password_hash = password_hash.decode('utf-8')
+
+    def check_password(self, password):
+        return checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
+
 class Transaction(Base):
     __tablename__ = 'transactions'
 
-    # Define columns for the Transaction table
-    id = Column(Integer, primary_key=True)    # Unique identifier
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # User ID (foreign key)
-    date = Column(Date, nullable=False)       # Transaction date
-    description = Column(String, nullable=False)   # Description of the transaction
-    amount = Column(Float, nullable=False)    # Transaction amount
-    transaction_type = Column(String, nullable=False)   # Transaction type (Income or Expense)
+    id = Column(Integer, primary_key=True)
+    description = Column(String)
+    amount = Column(Float)
+    date = Column(DateTime(timezone=True), server_default=func.now())
+    user_id = Column(Integer, ForeignKey('users.id'))
+    category_id = Column(Integer, ForeignKey('expense_categories.id'))
 
-    # Define the relationship between Transaction and User
     user = relationship('User', back_populates='transactions')
+    category = relationship('ExpenseCategory', back_populates='transactions')
 
-# Define the Goal table
+class ExpenseCategory(Base):
+    __tablename__ = 'expense_categories'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+    transactions = relationship('Transaction', back_populates='category')
+
 class Goal(Base):
     __tablename__ = 'goals'
 
-    # Define columns for the Goal table
-    id = Column(Integer, primary_key=True)    # Unique identifier
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # User ID (foreign key)
-    name = Column(String, nullable=False)     # Goal name
-    target_amount = Column(Float, nullable=False)   # Target amount
-    current_amount = Column(Float, nullable=False)  # Current amount saved
-    target_date = Column(Date)                 # Target date (optional)
+    id = Column(Integer, primary_key=True)
+    description = Column(String)
+    target_amount = Column(Float)
+    user_id = Column(Integer, ForeignKey('users.id'))
 
-    # Define the relationship between Goal and User
     user = relationship('User', back_populates='goals')
 
-# Define the Investment table
 class Investment(Base):
     __tablename__ = 'investments'
 
-    # Define columns for the Investment table
-    id = Column(Integer, primary_key=True)    # Unique identifier
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # User ID (foreign key)
-    name = Column(String, nullable=False)     # Investment name
-    amount_invested = Column(Float, nullable=False)  # Amount invested
-    current_value = Column(Float, nullable=False)   # Current value of the investment
-    purchase_date = Column(Date, nullable=False)     # Purchase date
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    initial_amount = Column(Float)
+    user_id = Column(Integer, ForeignKey('users.id'))
 
-    # Define the relationship between Investment and User
     user = relationship('User', back_populates='investments')
+
+# Create the database schema
+Base.metadata.create_all(engine)
