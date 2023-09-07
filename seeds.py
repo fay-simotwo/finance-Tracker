@@ -124,27 +124,10 @@ def create_goal(user_id):
 # Function to seed the database with expense categories
 def seed_expense_categories():
     categories = ['Education', 'Food', 'Entertainment', 'Dining Out', 'Transportation', 'Health', 'Luxury', 'Utilities',
-'Rent/Mortgage',
-'Insurance (Health, Life, Auto, Homeowners)',
-'Childcare',
-'Pet Expenses',
-'Travel/Vacation',
-'Hobbies/Recreation',
-'Gifts/Donations',
-'Clothing/Apparel',
-'Electronics/Gadgets',
-'Home Improvement',
-'Taxes',
-'Subscriptions (Streaming, Magazines, Software)',
-'Gym/Fitness',
-'Personal Care',
-'Home Maintenance',
-'Furniture/Furnishings',
-'Legal/Professional Fees',
-'Transportation (Gas, Public Transit)',
-'Savings/Investments'
-
-]
+    'Rent/Mortgage', 'Insurance (Health, Life, Auto, Homeowners)', 'Childcare', 'Pet Expenses', 'Travel/Vacation', 
+    'Hobbies/Recreation', 'Gifts/Donations', 'Clothing/Apparel', 'Electronics/Gadgets', 'Home Improvement', 'Taxes', 
+    'Subscriptions (Streaming, Magazines, Software)', 'Gym/Fitness', 'Personal Care', 'Home Maintenance', 
+    'Furniture/Furnishings', 'Legal/Professional Fees', 'Transportation (Gas, Public Transit)', 'Savings/Investments']
 
     existing_categories = session.query(ExpenseCategory).all()
     existing_category_names = set(category.name for category in existing_categories)
@@ -155,6 +138,7 @@ def seed_expense_categories():
             session.add(category)
 
     session.commit()
+
 
 
 # Main program entry point
