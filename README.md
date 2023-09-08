@@ -77,6 +77,9 @@ The Personal Finance Tracker CLI provides a set of commands to manage your finan
 - exit: Quit the application.
 - Follow the prompts and input the required information for each command.
 
+## dbdiagram.io Link
+[dbdiagram.io](https://dbdiagram.io/d/64f6d7f102bd1c4a5ef9ee56)
+
 ## Contributing
 If you'd like to contribute to this project, please follow the Contributing Guidelines.
 
